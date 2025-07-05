@@ -21,7 +21,7 @@
     "url": "git+https://github.com/daps94/devine-claude.git"
   },
   "license": "MIT",
-  "author": "Your Name",
+  "author": "daps94",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -29,8 +29,11 @@
   },
   "files": [
     "dist",
+    "bin",
+    "examples",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsup",

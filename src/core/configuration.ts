@@ -147,8 +147,8 @@ export class Configuration {
         if (mcp.type === 'stdio' && !mcp.command) {
           throw new Error(`stdio MCP server "${mcp.name}" missing command in instance "${name}"`);
         }
-        if (mcp.type === 'sse' && !mcp.url) {
-          throw new Error(`sse MCP server "${mcp.name}" missing url in instance "${name}"`);
+        if ((mcp.type === 'sse' || mcp.type === 'http') && !mcp.url) {
+          throw new Error(`${mcp.type} MCP server "${mcp.name}" missing url in instance "${name}"`);
         }
       });
     }

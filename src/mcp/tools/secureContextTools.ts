@@ -1,9 +1,20 @@
-import { Tool } from 'claude-mcp-server';
 import {
   SecureContextManager,
   SharedFinding,
   FindingFilter,
 } from '../../core/secureContextManager';
+
+// Tool interface for secure context tools
+interface Tool {
+  name: string;
+  description: string;
+  inputSchema: {
+    type: 'object';
+    properties: Record<string, any>;
+    required?: string[];
+  };
+  execute(params: any, context: any): Promise<any>;
+}
 
 // Tool to get agent's own context
 export const getAgentContextTool: Tool = {

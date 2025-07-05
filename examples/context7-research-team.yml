@@ -1,0 +1,83 @@
+# Research Team with Context7 Documentation Access
+# Demonstrates Context7 MCP integration for up-to-date documentation
+
+version: 1
+swarm:
+  name: "Research Team with Context7"
+  main: research_lead
+  instances:
+    research_lead:
+      description: "Research lead coordinating documentation research with Context7"
+      directory: .
+      model: opus
+      vibe: true
+      connections: [technical_researcher, documentation_writer]
+      prompt: |
+        You are a research lead coordinating a team with access to Context7 for up-to-date documentation.
+        Use Context7 to access current documentation for any technology or framework the team needs to research.
+        Coordinate between technical research and documentation writing to ensure accuracy and completeness.
+        Focus on leveraging the most current information available through Context7.
+
+    technical_researcher:
+      description: "Technical researcher using Context7 for accurate documentation research"
+      directory: ./research
+      model: sonnet
+      connections: [documentation_writer]
+      mcps:
+        - name: context7
+          type: http
+          url: https://mcp.context7.com/mcp
+      prompt: |
+        You are a technical researcher specializing in finding accurate, up-to-date documentation.
+        Use Context7 to access the latest documentation for any technology stack, framework, or tool.
+        Provide comprehensive research with proper citations and current best practices.
+        Focus on accuracy, completeness, and staying current with the latest developments.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - context7__search_docs
+        - context7__get_documentation
+        - get_agent_context
+        - save_agent_context
+
+    documentation_writer:
+      description: "Documentation writer creating comprehensive guides based on research"
+      directory: ./docs
+      model: sonnet
+      prompt: |
+        You are a documentation writer creating comprehensive, accurate documentation.
+        Use the research provided by the technical researcher to create clear, well-structured guides.
+        Ensure all information is current and includes proper examples and explanations.
+        Focus on clarity, completeness, and user-friendly documentation.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - get_agent_context
+        - save_agent_context
+        - share_finding
+        - get_shared_findings
+
+    code_validator:
+      description: "Code validator ensuring examples and snippets are current and working"
+      directory: ./validation
+      model: sonnet
+      mcps:
+        - name: context7
+          type: http
+          url: https://mcp.context7.com/mcp
+      prompt: |
+        You are a code validator ensuring all code examples and snippets are current and functional.
+        Use Context7 to verify that code examples align with the latest API versions and best practices.
+        Test and validate code snippets to ensure they work with current versions.
+        Focus on accuracy, functionality, and adherence to current standards.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - context7__search_docs
+        - context7__get_documentation
+        - share_finding
+        - get_shared_findings 

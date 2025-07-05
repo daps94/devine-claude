@@ -1,0 +1,73 @@
+# API Development and Integration Team
+# Specialized team for building robust APIs and integrations
+
+version: 1
+swarm:
+  name: "API Development Team"
+  main: api_architect
+  instances:
+    api_architect:
+      description: "API architect designing scalable and secure API systems"
+      directory: .
+      model: opus
+      vibe: true
+      connections: [backend_specialist, integration_expert, qa_engineer]
+      prompt: |
+        You are an API architect specializing in RESTful and GraphQL API design.
+        Design scalable, secure, and well-documented API systems.
+        Focus on proper versioning, authentication, rate limiting, and API contracts.
+        Ensure consistency across microservices and third-party integrations.
+
+    backend_specialist:
+      description: "Backend specialist implementing core API functionality"
+      directory: ./api
+      model: sonnet
+      connections: [integration_expert, qa_engineer]
+      prompt: |
+        You are a backend specialist implementing robust API endpoints.
+        Build secure, performant APIs with proper validation and error handling.
+        Implement authentication, authorization, and data persistence layers.
+        Focus on clean architecture, testing, and documentation.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - WebFetch
+
+    integration_expert:
+      description: "Integration specialist for third-party APIs and services"
+      directory: ./integrations
+      model: sonnet
+      connections: [backend_specialist]
+      prompt: |
+        You are an integration expert specializing in third-party API connections.
+        Build reliable connectors, handle API rate limits, and manage webhooks.
+        Implement proper retry logic, circuit breakers, and monitoring.
+        Focus on data transformation, mapping, and synchronization.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - WebFetch
+        - get_agent_context
+        - save_agent_context
+
+    qa_engineer:
+      description: "QA engineer specializing in API testing and validation"
+      directory: ./tests
+      model: sonnet
+      prompt: |
+        You are a QA engineer specializing in comprehensive API testing.
+        Create automated test suites for functional, performance, and security testing.
+        Implement contract testing, load testing, and integration test scenarios.
+        Focus on test data management, mocking, and continuous testing pipelines.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - WebFetch
+        - share_finding
+        - get_shared_findings 

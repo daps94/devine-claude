@@ -2,8 +2,16 @@
 
 export type Model = 'opus' | 'sonnet' | 'haiku' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo';
 export type Provider = 'claude' | 'openai';
-export type Tool = 'Read' | 'Edit' | 'Write' | 'Bash' | 'WebFetch' | 'WebSearch' | `mcp__${string}`;
-export type McpServerType = 'stdio' | 'sse';
+export type Tool =
+  | 'Read'
+  | 'Edit'
+  | 'Write'
+  | 'Bash'
+  | 'WebFetch'
+  | 'WebSearch'
+  | `mcp__${string}`
+  | `context7__${string}`;
+export type McpServerType = 'stdio' | 'sse' | 'http';
 
 export interface SwarmConfig {
   version: number;
@@ -45,8 +53,18 @@ export interface McpServerConfig {
   args?: string[];
   env?: Record<string, string>;
 
-  // For sse type
+  // For sse and http types
   url?: string;
+
+  // For http type (Context7 and other HTTP MCP servers)
+  headers?: Record<string, string>;
+  auth?: {
+    type: 'bearer' | 'basic' | 'api-key';
+    token?: string;
+    username?: string;
+    password?: string;
+    header?: string;
+  };
 }
 
 export interface McpConfiguration {

@@ -13,10 +13,11 @@ export function commandExists(command: string): boolean {
 
 export function executeCommand(command: string, options?: ExecSyncOptions): string {
   try {
-    return execSync(command, {
+    const result = execSync(command, {
       encoding: 'utf8',
       ...options,
-    }).trim();
+    });
+    return typeof result === 'string' ? result.trim() : result.toString().trim();
   } catch (error: any) {
     throw new Error(`Command failed: ${command}\n${error.message}`);
   }

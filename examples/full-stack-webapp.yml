@@ -1,0 +1,88 @@
+# Full-Stack Web Application Development Team
+# Complete team for building modern web applications
+
+version: 1
+swarm:
+  name: "Full-Stack Web App Team"
+  main: tech_lead
+  before:
+    - "npm install"
+    - "docker-compose up -d db redis"
+  instances:
+    tech_lead:
+      description: "Technical lead coordinating the full-stack development"
+      directory: .
+      model: opus
+      vibe: true
+      connections: [backend_dev, frontend_dev, database_expert, devops_engineer]
+      prompt: |
+        You are the technical lead for a full-stack web application development team.
+        Coordinate between frontend, backend, database, and DevOps specialists.
+        Make architectural decisions and ensure code quality across the stack.
+        Focus on scalability, performance, and maintainability.
+
+    backend_dev:
+      description: "Backend API developer specializing in Node.js/Python"
+      directory: ./backend
+      model: sonnet
+      connections: [database_expert, devops_engineer]
+      prompt: |
+        You are a backend developer specializing in RESTful APIs and microservices.
+        Build scalable, secure APIs with proper authentication and validation.
+        Work closely with the database expert for optimal data modeling.
+        Use Node.js, Express, and modern backend patterns.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - get_agent_context
+        - save_agent_context
+
+    frontend_dev:
+      description: "Frontend developer specializing in React and modern UI"
+      directory: ./frontend
+      model: sonnet
+      connections: [backend_dev]
+      prompt: |
+        You are a frontend developer specializing in React, TypeScript, and modern UI.
+        Build responsive, accessible, and performant user interfaces.
+        Implement state management, routing, and API integration.
+        Focus on user experience and component reusability.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - WebFetch
+
+    database_expert:
+      description: "Database architect and optimization specialist"
+      directory: ./database
+      model: sonnet
+      connections: [backend_dev]
+      prompt: |
+        You are a database expert specializing in PostgreSQL, Redis, and data modeling.
+        Design efficient schemas, optimize queries, and manage migrations.
+        Ensure data integrity, security, and performance.
+        Provide guidance on caching strategies and database best practices.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+
+    devops_engineer:
+      description: "DevOps engineer handling deployment and infrastructure"
+      directory: ./infrastructure
+      model: sonnet
+      prompt: |
+        You are a DevOps engineer specializing in containerization and CI/CD.
+        Manage Docker, Kubernetes, and cloud infrastructure.
+        Set up monitoring, logging, and automated deployment pipelines.
+        Ensure security, scalability, and reliability of the application.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash 
