@@ -1,0 +1,28 @@
+# Simple Devine Team Example
+# Created with devine init
+
+version: 1
+swarm:
+  name: "Simple Dev Team"
+  main: lead
+  instances:
+    lead:
+      description: "Team lead using Devine to coordinate development"
+      directory: .
+      model: sonnet
+      vibe: true  # Full tool access for orchestration
+      connections: [developer]
+      prompt: |
+        You are the team lead using Devine orchestration.
+        Delegate implementation tasks to the developer.
+        
+    developer:
+      description: "Full-stack developer"
+      directory: .
+      model: sonnet
+      prompt: "You are a full-stack developer. Implement features as requested."
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash

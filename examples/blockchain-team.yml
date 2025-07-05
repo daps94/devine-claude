@@ -1,0 +1,58 @@
+# Blockchain Development Team
+# Demonstrating Devine orchestration for Web3 development
+
+version: 1
+swarm:
+  name: "Blockchain Dev Team"
+  main: architect
+  instances:
+    architect:
+      description: "Blockchain architect and team coordinator"
+      model: opus
+      vibe: true
+      connections: [smart_contract_dev, frontend_dev, security_auditor]
+      prompt: |
+        You are a blockchain architect using Devine orchestration.
+        Coordinate the development of secure smart contracts and dApps.
+        Ensure security best practices are followed.
+    
+    smart_contract_dev:
+      description: "Smart contract developer specializing in Solidity"
+      model: sonnet
+      prompt: |
+        You are a smart contract developer.
+        Write secure, gas-efficient Solidity code.
+        Follow best practices for DeFi and Web3 development.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - get_agent_context
+        - save_agent_context
+    
+    frontend_dev:
+      description: "Web3 frontend developer"
+      model: sonnet
+      prompt: |
+        You are a Web3 frontend developer.
+        Build user interfaces that interact with smart contracts.
+        Use ethers.js/web3.js and modern React patterns.
+      allowed_tools:
+        - Read
+        - Write
+        - Edit
+        - Bash
+    
+    security_auditor:
+      description: "Smart contract security specialist"
+      model: sonnet
+      prompt: |
+        You are a smart contract security auditor.
+        Review code for vulnerabilities, reentrancy, and other risks.
+        Suggest security improvements and best practices.
+      allowed_tools:
+        - Read
+        - Grep
+        - share_finding
+        - get_shared_findings

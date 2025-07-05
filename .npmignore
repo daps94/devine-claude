@@ -1,0 +1,50 @@
+# Source files
+src/
+test/
+
+# Configuration files
+.eslintrc.json
+.prettierrc
+jest.config.js
+tsconfig.json
+tsup.config.ts
+
+# Development files
+*.test.ts
+*.spec.ts
+
+# Documentation source
+docs/
+
+# Git files
+.git/
+.gitignore
+
+# CI/CD
+.github/
+
+# Local development
+.env
+.env.local
+*.log
+.DS_Store
+
+# Build artifacts
+*.tgz
+
+# IDE files
+.vscode/
+.idea/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Keep these files
+!dist/
+!bin/
+!examples/
+!README.md
+!LICENSE
+!CHANGELOG.md
+!package.json
